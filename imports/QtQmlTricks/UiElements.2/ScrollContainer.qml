@@ -167,6 +167,7 @@ FocusScope {
             id: scrollbarX;
             height: (indicatorOnly ? Style.spacingSmall : Style.spacingBig);
             visible: (flickableItem && flickableItem.flickableDirection !== Flickable.VerticalFlick);
+            opacity: (flickableItem && flickableItem.contentWidth > flickableItem.width ? 1.0 : 0.35);
             anchors.rightMargin: (scrollbarY.visible ? scrollbarY.width : 0);
             ExtraAnchors.bottomDock: parent;
 
@@ -254,6 +255,7 @@ FocusScope {
             id: scrollbarY;
             width: (indicatorOnly ? Style.spacingSmall : Style.spacingBig);
             visible: (flickableItem && flickableItem.flickableDirection !== Flickable.HorizontalFlick);
+            opacity: (flickableItem && flickableItem.contentHeight > flickableItem.height ? 1.0 : 0.35);
             anchors.bottomMargin: (scrollbarX.visible ? scrollbarX.height : 0);
             ExtraAnchors.rightDock: parent;
 
