@@ -16,6 +16,6 @@ ComboListDelegate {
         id: lbl;
         text: base.value;
         emphasis: base.active;
-        anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
     }
 }

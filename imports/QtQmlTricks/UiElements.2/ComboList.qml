@@ -8,10 +8,11 @@ Item {
     implicitWidth: (dumbLayout.width + arrow.width + padding * 3);
     implicitHeight: (loaderCurrent.height + padding * 2);
 
-    property int   padding    : Style.spacingNormal;
-    property bool  filterable : false;
-    property alias rounding   : rect.radius;
-    property alias backColor  : rect.color;
+    property int    padding     : Style.spacingNormal;
+    property bool   filterable  : false;
+    property alias  rounding    : rect.radius;
+    property alias  backColor   : rect.color;
+    property string placeholder : "";
 
     property var       model      : undefined;
     property Component delegate   : ComboListDelegateForModelWithRoles { }
@@ -135,10 +136,10 @@ Item {
         enabled: base.enabled;
         sourceComponent: base.delegate;
         anchors {
-            left: parent.left;
+            left: (parent ? parent.left : undefined);
             right: arrow.left;
             margins: padding;
-            verticalCenter: parent.verticalCenter;
+            verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
 
         Binding {
@@ -154,12 +155,17 @@ Item {
         Binding {
             target: loaderCurrent.item;
             property: "value";
-            value: currentValue;
+            value: (currentValue || placeholder);
         }
         Binding {
             target: loaderCurrent.item;
             property: "active";
             value: false;
+        }
+        Binding {
+            target: loaderCurrent.item;
+            property: "opacity";
+            value: (currentKey !== undefined ? 1.0 : 0.65);
         }
     }
     SymbolLoader {
@@ -169,9 +175,9 @@ Item {
         symbol: Style.symbolArrowDown;
         enabled: base.enabled;
         anchors {
-            right: parent.right;
+            right: (parent ? parent.right : undefined);
             margins: padding;
-            verticalCenter: parent.verticalCenter;
+            verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
     }
     Component {
