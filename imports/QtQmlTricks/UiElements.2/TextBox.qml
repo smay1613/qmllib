@@ -79,11 +79,10 @@ FocusScope {
                 pixelSize: Style.fontSizeNormal;
             }
             anchors {
-                left: parent.left;
-                right: parent.right;
                 margins: padding;
-                verticalCenter: parent.verticalCenter;
+                verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
+            ExtraAnchors.horizontalFill: parent;
             onAccepted: { base.accepted (); }
         }
         MouseArea {
@@ -106,8 +105,8 @@ FocusScope {
                     GradientStop { position: 1.0; color: backColor; }
                 }
                 anchors {
-                    verticalCenter: parent.verticalCenter;
-                    horizontalCenter: parent.left;
+                    verticalCenter: (parent ? parent.verticalCenter : undefined);
+                    horizontalCenter: (parent ? parent.left : undefined);
                 }
             }
             SymbolLoader {
@@ -132,10 +131,9 @@ FocusScope {
             pixelSize: input.font.pixelSize;
         }
         anchors {
-            left: parent.left;
-            right: parent.right;
             margins: padding;
-            verticalCenter: parent.verticalCenter;
+            verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
+        ExtraAnchors.horizontalFill: parent;
     }
 }
