@@ -115,8 +115,8 @@ FocusScope {
         id: container;
         clip: true;
         anchors {
-            top: (loaderHeader.item ? loaderHeader.bottom : parent.top);
-            bottom: (loaderFooter.item ? loaderFooter.top : parent.bottom);
+            top: (loaderHeader && loaderHeader.item ? loaderHeader.bottom : parent.top);
+            bottom: (loaderFooter && loaderFooter.item ? loaderFooter.top : parent.bottom);
             margins: rect.border.width;
         }
         ExtraAnchors.horizontalFill: parent;
@@ -146,8 +146,8 @@ FocusScope {
             children: flickableItem;
             anchors {
                 fill: parent;
-                rightMargin: (scrollbarY.visible ? scrollbarY.width : 0);
-                bottomMargin: (scrollbarX.visible ? scrollbarX.height : 0);
+                rightMargin: (scrollbarY && scrollbarY.visible ? scrollbarY.width : 0);
+                bottomMargin: (scrollbarX && scrollbarX.visible ? scrollbarX.height : 0);
             }
 
             // CONTENT HERE
@@ -168,7 +168,7 @@ FocusScope {
             height: (indicatorOnly ? Style.spacingSmall : Style.spacingBig);
             visible: (flickableItem && flickableItem.flickableDirection !== Flickable.VerticalFlick);
             opacity: (flickableItem && flickableItem.contentWidth > flickableItem.width ? 1.0 : 0.35);
-            anchors.rightMargin: (scrollbarY.visible ? scrollbarY.width : 0);
+            anchors.rightMargin: (scrollbarY && scrollbarY.visible ? scrollbarY.width : 0);
             ExtraAnchors.bottomDock: parent;
 
             Rectangle {
