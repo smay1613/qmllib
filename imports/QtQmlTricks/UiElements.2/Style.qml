@@ -220,7 +220,7 @@ QtObject {
                     antialiasing: true;
                     anchors {
                         verticalCenter: parent.top;
-                        horizontalCenter: parent.horizontalCenter;
+                        horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                         alignWhenCentered: false;
                     }
                 }
@@ -246,7 +246,7 @@ QtObject {
                     antialiasing: true;
                     anchors {
                         verticalCenter: parent.bottom;
-                        horizontalCenter: parent.horizontalCenter;
+                        horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                         alignWhenCentered: false;
                     }
                 }
@@ -271,7 +271,7 @@ QtObject {
                     rotation: 45;
                     antialiasing: true;
                     anchors {
-                        verticalCenter: parent.verticalCenter;
+                        verticalCenter: (parent ? parent.verticalCenter : undefined);
                         horizontalCenter: parent.right;
                         alignWhenCentered: false;
                     }
@@ -297,7 +297,7 @@ QtObject {
                     rotation: 45;
                     antialiasing: true;
                     anchors {
-                        verticalCenter: parent.verticalCenter;
+                        verticalCenter: (parent ? parent.verticalCenter : undefined);
                         horizontalCenter: parent.left;
                         alignWhenCentered: false;
                     }

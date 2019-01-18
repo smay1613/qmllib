@@ -32,7 +32,7 @@ Item {
 
         StretchColumnContainer {
             spacing: Style.spacingSmall;
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
             SymbolLoader {
                 size: Style.fontSizeNormal;
@@ -42,7 +42,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowUp;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerIncrHours;
@@ -57,7 +57,7 @@ Item {
                 textAlign: TextInput.AlignHCenter;
                 validator: IntValidator { top: 23; bottom: 0; }
                 implicitWidth: metrics.width;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                 onActiveFocusChanged: {
                     if (!activeFocus) {
                         apply ();
@@ -94,7 +94,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowDown;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerDecrHours;
@@ -108,11 +108,11 @@ Item {
         TextLabel {
             text: ":";
             emphasis: true;
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
         StretchColumnContainer {
             spacing: Style.spacingSmall;
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
             SymbolLoader {
                 size: Style.fontSizeNormal;
@@ -122,7 +122,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowUp;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerIncrMinutes;
@@ -137,7 +137,7 @@ Item {
                 textAlign: TextInput.AlignHCenter;
                 validator: IntValidator { top: 59; bottom: 0; }
                 implicitWidth: metrics.width;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                 onActiveFocusChanged: {
                     if (!activeFocus) {
                         apply ();
@@ -174,7 +174,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowDown;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerDecrMinutes;
@@ -188,11 +188,11 @@ Item {
         TextLabel {
             text: ":";
             emphasis: true;
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
         StretchColumnContainer {
             spacing: Style.spacingSmall;
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
             SymbolLoader {
                 size: Style.fontSizeNormal;
@@ -202,7 +202,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowUp;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerIncrSecondes;
@@ -217,7 +217,7 @@ Item {
                 textAlign: TextInput.AlignHCenter;
                 validator: IntValidator { top: 59; bottom: 0; }
                 implicitWidth: metrics.width;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                 onActiveFocusChanged: {
                     if (!activeFocus) {
                         apply ();
@@ -254,7 +254,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowDown;
-                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.horizontalCenter: (parent ? parent.horizontalCenter : undefined);
 
                 AutoRepeatableClicker {
                     id: clickerDecrSeconds;

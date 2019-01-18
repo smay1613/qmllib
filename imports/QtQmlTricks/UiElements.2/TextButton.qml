@@ -24,7 +24,7 @@ AutoRepeatableClicker {
                 target: ico;
                 anchors {
                     left: parent.left;
-                    verticalCenter: parent.verticalCenter;
+                    verticalCenter: (ico && ico.parent ? parent.verticalCenter : undefined);
                 }
             }
             AnchorChanges {
@@ -32,7 +32,7 @@ AutoRepeatableClicker {
                 anchors {
                     left: ico.right;
                     right: parent.right;
-                    verticalCenter: parent.verticalCenter;
+                    verticalCenter: (lbl && lbl.parent ? parent.verticalCenter : undefined);
                 }
             }
         },
@@ -52,14 +52,14 @@ AutoRepeatableClicker {
                 anchors {
                     left: parent.left;
                     right: ico.left;
-                    verticalCenter: parent.verticalCenter;
+                    verticalCenter: (lbl && lbl.parent ? parent.verticalCenter : undefined);
                 }
             }
             AnchorChanges {
                 target: ico;
                 anchors {
                     right: parent.right;
-                    verticalCenter: parent.verticalCenter;
+                    verticalCenter: (ico && ico.parent ? parent.verticalCenter : undefined);
                 }
             }
         },
@@ -75,8 +75,8 @@ AutoRepeatableClicker {
             AnchorChanges {
                 target: lbl;
                 anchors {
-                    verticalCenter: parent.verticalCenter;
-                    horizontalCenter: parent.horizontalCenter;
+                    verticalCenter: (lbl && lbl.parent ? parent.verticalCenter : undefined);
+                    horizontalCenter: (lbl && lbl.parent ? parent.horizontalCenter : undefined);
                 }
             }
         },
@@ -92,8 +92,8 @@ AutoRepeatableClicker {
             AnchorChanges {
                 target: ico;
                 anchors {
-                    verticalCenter: parent.verticalCenter;
-                    horizontalCenter: parent.horizontalCenter;
+                    verticalCenter: (ico && ico.parent ? parent.verticalCenter : undefined);
+                    horizontalCenter: (ico && ico.parent ? parent.horizontalCenter : undefined);
                 }
             }
         },
@@ -133,8 +133,8 @@ AutoRepeatableClicker {
     }
 
     Binding {
-        target: (ico.item && "color" in ico.item ? ico.item : null);
-        when: (autoColorIcon && ico.item)
+        target: ico.item;
+        when: (autoColorIcon && ico.item && "color" in ico.item);
         property: "color";
         value: textColor;
     }

@@ -336,14 +336,14 @@ Group {
                 visible: (sourceComponent !== null);
                 rotation: -parent.rotation;
                 sourceComponent: base.icon;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             TextLabel {
                 text: base.title;
                 visible: (text !== "");
                 font.pixelSize: Style.fontSizeBig;
                 font.capitalization: Font.SmallCaps;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             Stretcher { }
         }
@@ -387,7 +387,7 @@ Group {
             spacing: Style.spacingNormal;
             anchors {
                 margins: Style.spacingNormal;
-                verticalCenter: parent.verticalCenter;
+                verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             ExtraAnchors.horizontalFill: parent;
 
@@ -396,12 +396,12 @@ Group {
                 enabled: base.enabled;
                 visible: (sourceComponent !== null);
                 sourceComponent: base.icon;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             Stretcher {
                 height: implicitHeight;
                 implicitHeight: lbl.implicitHeight;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 TextLabel {
                     id: lbl;
@@ -422,7 +422,7 @@ Group {
                 }
                 visible: detachable;
                 padding: (Style.lineSize * 2);
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onClicked: { detach (); }
             }
             TextButton {
@@ -442,7 +442,7 @@ Group {
                 }
                 visible: collapsable;
                 padding: (Style.lineSize * 2);
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onClicked: { collapse (); }
             }
         }

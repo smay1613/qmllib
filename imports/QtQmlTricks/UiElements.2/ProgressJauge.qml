@@ -27,7 +27,7 @@ Item {
     Item {
         id: bar;
         height: barSize;
-        anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
         ExtraAnchors.horizontalFill: parent;
 
         Rectangle {

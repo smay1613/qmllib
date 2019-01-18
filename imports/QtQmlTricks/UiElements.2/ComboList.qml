@@ -6,7 +6,7 @@ Item {
     width: implicitWidth;
     height: implicitHeight;
     implicitWidth: (dumbLayout.width + arrow.width + padding * 3);
-    implicitHeight: (loaderCurrent.height + padding * 2);
+    implicitHeight: (dumbLayout.height / count + padding * 2);
 
     property int    padding     : Style.spacingNormal;
     property bool   filterable  : false;
@@ -42,6 +42,23 @@ Item {
         return ret;
     }
 
+    Rectangle {
+        id: rect;
+        radius: Style.roundness;
+        enabled: base.enabled;
+        antialiasing: radius;
+        gradient: (enabled
+                   ? (clicker.pressed ||
+                      clicker.dropdownItem
+                      ? Style.gradientPressed ()
+                      : Style.gradientIdle (Qt.lighter (Style.colorClickable, clicker.containsMouse ? 1.15 : 1.0)))
+                   : Style.gradientDisabled ());
+        border {
+            width: Style.lineSize;
+            color: Style.colorBorder;
+        }
+        anchors.fill: parent;
+    }
     StretchColumnContainer {
         id: dumbLayout;
         opacity: 0;
@@ -50,32 +67,22 @@ Item {
             id: repeater;
             model: base.model;
             delegate: Loader {
-                id: loader;
+                id: loaderDumb;
                 sourceComponent: base.delegate;
+                onInstanceChanged: {
+                    if (instance !== null) {
+                        instance.active    = true;
+                        instance.model     = model;
+                        instance.modelData = model.modelData;
+                        instance.index     = Qt.binding (function () { return loaderDumb.idx; });
+                    }
+                }
 
-                readonly property var value : (item ? item ["value"] : undefined);
-                readonly property var key   : (item ? item ["key"]   : undefined);
+                readonly property ComboListDelegate instance : item;
 
-                Binding {
-                    target: loader.item;
-                    property: "index";
-                    value: model.index;
-                }
-                Binding {
-                    target: loader.item;
-                    property: "model";
-                    value: (typeof (model) !== "undefined" ? model : undefined);
-                }
-                Binding {
-                    target: loader.item;
-                    property: "modelData";
-                    value: (typeof (modelData) !== "undefined" ? modelData : undefined);
-                }
-                Binding {
-                    target: loader.item;
-                    property: "active";
-                    value: true;
-                }
+                readonly property var idx   : model.index;
+                readonly property var value : (instance ? instance.value : undefined);
+                readonly property var key   : (instance ? instance.key   : undefined);
             }
         }
     }
@@ -107,29 +114,6 @@ Item {
             }
         }
     }
-    PixelPerfectContainer {
-        contentItem: rect;
-        anchors.fill: parent;
-
-        Rectangle {
-            id: rect;
-            width: Math.round (parent.width);
-            height: Math.round (parent.height);
-            radius: Style.roundness;
-            enabled: base.enabled;
-            antialiasing: radius;
-            gradient: (enabled
-                       ? (clicker.pressed ||
-                          clicker.dropdownItem
-                          ? Style.gradientPressed ()
-                          : Style.gradientIdle (Qt.lighter (Style.colorClickable, clicker.containsMouse ? 1.15 : 1.0)))
-                       : Style.gradientDisabled ());
-            border {
-                width: Style.lineSize;
-                color: Style.colorBorder;
-            }
-        }
-    }
     Loader {
         id: loaderCurrent;
         clip: true;
@@ -141,32 +125,17 @@ Item {
             margins: padding;
             verticalCenter: (parent ? parent.verticalCenter : undefined);
         }
+        onInstanceChanged: {
+            if (instance !== null) {
+                instance.active  = false;
+                instance.index   = Qt.binding (function () { return base.currentIdx; });
+                instance.key     = Qt.binding (function () { return base.currentKey; });
+                instance.value   = Qt.binding (function () { return (base.currentValue || base.placeholder); });
+                instance.opacity = Qt.binding (function () { return (base.currentKey !== undefined ? 1.0 : 0.65); });
+            }
+        }
 
-        Binding {
-            target: loaderCurrent.item;
-            property: "index";
-            value: currentIdx;
-        }
-        Binding {
-            target: loaderCurrent.item;
-            property: "key";
-            value: currentKey;
-        }
-        Binding {
-            target: loaderCurrent.item;
-            property: "value";
-            value: (currentValue || placeholder);
-        }
-        Binding {
-            target: loaderCurrent.item;
-            property: "active";
-            value: false;
-        }
-        Binding {
-            target: loaderCurrent.item;
-            property: "opacity";
-            value: (currentKey !== undefined ? 1.0 : 0.65);
-        }
+        readonly property ComboListDelegate instance : item;
     }
     SymbolLoader {
         id: arrow;
@@ -297,17 +266,19 @@ Item {
                                 id: repeaterDropdown;
                                 model: base.model;
                                 delegate: MouseArea {
-                                    width: implicitWidth;
-                                    height: implicitHeight;
+                                    id: dlg;
                                     visible: frame.matches (loader.instance.value);
                                     hoverEnabled: Style.useHovering;
-                                    implicitWidth: (loader.width + padding * 2);
-                                    implicitHeight: (loader.height + padding * 2);
+                                    implicitWidth: (loader.implicitWidth + padding * 2);
+                                    implicitHeight: (loader.implicitHeight + padding * 2);
                                     onClicked: {
-                                        currentIdx = model.index;
+                                        currentIdx = idx;
                                         clicker.destroyDropdown ();
                                     }
                                     ExtraAnchors.horizontalFill: parent;
+
+                                    readonly property var  idx  : model.index;
+                                    readonly property bool curr : (idx === base.currentIdx);
 
                                     Rectangle {
                                         color: Style.colorHighlight;
@@ -322,31 +293,19 @@ Item {
                                         sourceComponent: base.delegate;
                                         anchors {
                                             margins: padding;
-                                            verticalCenter: parent.verticalCenter;
+                                            verticalCenter: (parent ? parent.verticalCenter : undefined);
                                         }
                                         ExtraAnchors.horizontalFill: parent;
+                                        onInstanceChanged: {
+                                            if (instance !== null) {
+                                                instance.index     = Qt.binding (function () { return dlg.idx; });
+                                                instance.active    = Qt.binding (function () { return dlg.curr; });
+                                                instance.model     = model;
+                                                instance.modelData = model.modelData;
+                                            }
+                                        }
 
                                         readonly property ComboListDelegate instance : item;
-                                    }
-                                    Binding {
-                                        target: loader.item;
-                                        property: "index";
-                                        value: model.index;
-                                    }
-                                    Binding {
-                                        target: loader.item;
-                                        property: "model";
-                                        value: (typeof (model) !== "undefined" ? model : undefined);
-                                    }
-                                    Binding {
-                                        target: loader.item;
-                                        property: "modelData";
-                                        value: (typeof (modelData) !== "undefined" ? modelData : undefined);
-                                    }
-                                    Binding {
-                                        target: loader.item;
-                                        property: "active";
-                                        value: (model.index === base.currentIdx);
                                     }
                                 }
                             }

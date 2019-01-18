@@ -53,7 +53,7 @@ FocusScope {
                 model: FileSystem.drivesList;
                 visible: (FileSystem.rootPath !== "/");
                 delegate: ComboListDelegateForSimpleVar { }
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onCurrentKeyChanged: {
                     if (currentKey !== undefined && currentKey !== "" && ready) {
                         rootFolder = currentKey;
@@ -70,14 +70,14 @@ FocusScope {
             Stretcher {
                 height: implicitHeight;
                 implicitHeight: path.height;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 TextLabel {
                     id: path;
                     text: folder;
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere;
                     font.pixelSize: Style.fontSizeSmall;
-                    anchors.verticalCenter: parent.verticalCenter;
+                    anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                     ExtraAnchors.horizontalFill: parent;
                 }
             }
@@ -89,7 +89,7 @@ FocusScope {
                     size: Style.iconSize (1);
                     color: Style.colorForeground;
                 }
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onClicked: { goToFolder (FileSystem.parentDir (folder)); }
             }
         }
@@ -144,7 +144,7 @@ FocusScope {
                         anchors {
                             left: parent.left;
                             margins: Style.spacingNormal;
-                            verticalCenter: parent.verticalCenter;
+                            verticalCenter: (parent ? parent.verticalCenter : undefined);
                         }
                     }
                     TextLabel {
@@ -157,7 +157,7 @@ FocusScope {
                             left: img.right;
                             right: parent.right;
                             margins: Style.spacingNormal;
-                            verticalCenter: parent.verticalCenter;
+                            verticalCenter: (parent ? parent.verticalCenter : undefined);
                         }
                     }
                 }
@@ -168,14 +168,14 @@ FocusScope {
 
             TextLabel {
                 text: qsTr ("Name :");
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             TextBox {
                 id: inputName;
                 focus: true;
                 enabled: (selectionType & selectAllowNew);
                 implicitWidth: -1;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onAccepted: { base.fileNameReturned (); }
 
                 readonly property string value : (text.trim ());
