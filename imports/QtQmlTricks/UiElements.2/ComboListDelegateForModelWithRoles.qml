@@ -3,12 +3,10 @@ import QtQmlTricks.UiElements 2.0;
 
 ComboListDelegate {
     id: base;
-    key: (model ? model [roleKey] : undefined);
-    value: (model ? model [roleValue] : "");
-    width: implicitWidth;
-    height: implicitHeight;
-    implicitWidth: lbl.contentWidth;
-    implicitHeight: lbl.contentHeight;
+    key: (base.model ? base.model [base.roleKey] : undefined);
+    value: (base.model ? base.model [base.roleValue] : "");
+    implicitWidth: lbl.implicitWidth;
+    implicitHeight: lbl.implicitHeight;
 
     property string roleKey   : "key";
     property string roleValue : "value";

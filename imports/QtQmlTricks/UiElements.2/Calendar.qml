@@ -89,7 +89,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowLeft;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 MouseArea {
                     id: clickerPrevYear;
@@ -102,7 +102,7 @@ Item {
             MouseArea {
                 implicitWidth: editYear.implicitWidth;
                 implicitHeight: editYear.implicitHeight
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 onClicked: {
                     editYear.visible = true;
                     editYear.forceActiveFocus ();
@@ -139,7 +139,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowRight;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 MouseArea {
                     id: clickerNextYear;
@@ -161,7 +161,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowLeft;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 MouseArea {
                     id: clickerPrevMonth;
@@ -175,7 +175,7 @@ Item {
                 text: Qt.locale ().monthName (currentMonth -1, Locale.LongFormat);
                 horizontalAlignment: Text.AlignHCenter;
                 font.pixelSize: Style.fontSizeBig;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
             Stretcher { }
             SymbolLoader {
@@ -186,7 +186,7 @@ Item {
                            : Style.colorForeground)
                         : Style.colorBorder);
                 symbol: Style.symbolArrowRight;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
                 MouseArea {
                     id: clickerNextMonth;
@@ -217,7 +217,7 @@ Item {
                     verticalAlignment: Text.AlignVCenter;
                     horizontalAlignment: Text.AlignHCenter;
                     font.pixelSize: Style.fontSizeSmall;
-                    anchors.verticalCenter: parent.verticalCenter;
+                    anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
                 }
             }
         }

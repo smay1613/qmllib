@@ -60,7 +60,7 @@ MouseArea {
                 visible: (sourceComponent !== null);
                 anchors {
                     top: parent.top;
-                    horizontalCenter: parent.horizontalCenter;
+                    horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                 }
             }
         }

@@ -216,7 +216,7 @@ Item {
                 color: Style.colorSelection;
                 width: (Style.lineSize * 2);
                 height: Style.spacingNormal;
-                anchors.verticalCenter: parent.verticalCenter;
+                anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
             }
         }
         TextLabel {

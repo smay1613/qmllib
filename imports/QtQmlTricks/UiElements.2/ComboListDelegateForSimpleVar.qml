@@ -3,12 +3,10 @@ import QtQmlTricks.UiElements 2.0;
 
 ComboListDelegate {
     id: base;
-    key: modelData;
-    value: (modelData ? modelData : "");
-    width: implicitWidth;
-    height: implicitHeight;
-    implicitWidth: lbl.contentWidth;
-    implicitHeight: lbl.contentHeight;
+    key: base.modelData;
+    value: (base.modelData ? base.modelData : "");
+    implicitWidth: lbl.implicitWidth;
+    implicitHeight: lbl.implicitHeight;
 
     readonly property alias label : lbl;
 

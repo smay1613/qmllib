@@ -65,14 +65,14 @@ Item {
                             anchors {
                                 left: ico.right;
                                 right: parent.right;
-                                verticalCenter: parent.verticalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
                             }
                         }
                         AnchorChanges {
                             target: ico;
                             anchors {
                                 left: parent.left;
-                                verticalCenter: parent.verticalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
                             }
                         }
                         PropertyChanges {
@@ -94,7 +94,7 @@ Item {
                             anchors {
                                 left: parent.left;
                                 right: parent.right;
-                                verticalCenter: parent.verticalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
                             }
                         }
                         PropertyChanges {
@@ -114,8 +114,8 @@ Item {
                         AnchorChanges {
                             target: ico;
                             anchors {
-                                verticalCenter: parent.verticalCenter;
-                                horizontalCenter: parent.horizontalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
+                                horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                             }
                         }
                         PropertyChanges {

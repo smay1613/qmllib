@@ -14,7 +14,7 @@ Rectangle {
         id: layout;
         spacing: Style.spacingNormal;
         anchors.margins: Style.spacingNormal;
-        anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
         ExtraAnchors.horizontalFill: parent;
 
         // NOTE : CONTENT GOES HERE

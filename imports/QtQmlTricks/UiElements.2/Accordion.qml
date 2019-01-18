@@ -57,14 +57,14 @@ Item {
                             target: lbl;
                             anchors {
                                 left: ico.right;
-                                verticalCenter: parent.verticalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
                             }
                         }
                         AnchorChanges {
                             target: ico;
                             anchors {
                                 left: parent.left;
-                                verticalCenter: parent.verticalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
                             }
                         }
                     },
@@ -75,8 +75,8 @@ Item {
                         AnchorChanges {
                             target: lbl;
                             anchors {
-                                verticalCenter: parent.verticalCenter;
-                                horizontalCenter: parent.horizontalCenter;
+                                verticalCenter: (parent ? parent.verticalCenter : undefined);
+                                horizontalCenter: (parent ? parent.horizontalCenter : undefined);
                             }
                         }
                     }

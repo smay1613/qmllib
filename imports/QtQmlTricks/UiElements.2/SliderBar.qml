@@ -51,7 +51,7 @@ ProgressJauge {
             width: Style.lineSize;
             color: Style.colorBorder;
         }
-        anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: (parent ? parent.verticalCenter : undefined);
 
         Binding on x {
             when: !clicker.pressed;
