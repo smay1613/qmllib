@@ -13,7 +13,7 @@ QtObject {
 
     property bool useHovering   : !isMobile;
     property bool useSlimFonts  : true;
-    property bool useDarkTheme  : false;
+    property bool useDarkTheme  : true;
     property bool useNativeText : false;
 
     property int themeFadeTime : 850;
